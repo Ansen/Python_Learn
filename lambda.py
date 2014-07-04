@@ -1,2 +1,2 @@
-func = lambda x,y: x + y
-print func(3,4)
+func = lambda x, y: x + y
+print func(3, 4)

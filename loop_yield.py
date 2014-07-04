@@ -5,5 +5,6 @@ def gen():
     yield
     yield 1000
 
+
 for i in gen():
     print i

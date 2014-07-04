@@ -1,8 +1,9 @@
 def test_func():
     try:
-        m = 1/0
+        m = 1 / 0
     except NameError:
         print ("Catch NameError in the sub-function")
+
 
 try:
     test_func()

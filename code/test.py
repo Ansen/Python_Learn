@@ -1,45 +1,47 @@
 #!/usr/bin/python
 #coding:utf-8
-#×÷Õß£ºByron
-#²©¿Í£ºhttp://jiabin.tk
- 
+#ï¿½ï¿½ï¿½ß£ï¿½Byron
+#ï¿½ï¿½ï¿½Í£ï¿½http://jiabin.tk
+
 import urllib2
 import re
- 
-#¶¨Òå³ÌÐòÖ÷º¯Êý
+
+#ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 def qiubai(page):
     url = "http://www.qiushibaike.com/week/page/%s" % page
-    re_qb = re.compile(r'detail.*?<a.*?>(.*?)<.*?title="(.*?)">\s*(.*?)\s*?<',re.DOTALL)
+    re_qb = re.compile(r'detail.*?<a.*?>(.*?)<.*?title="(.*?)">\s*(.*?)\s*?<', re.DOTALL)
     html = urllib2.urlopen(url).read()
     my_qiubai = re_qb.findall(html)
     for i in range(20):
         for k in range(3):
             print my_qiubai[i][k]
-        s = raw_input("»Ø³µ¼ÌÐø")
+        s = raw_input("ï¿½Ø³ï¿½ï¿½ï¿½ï¿½ï¿½")
         if s == "q":
             exit()
-        print "-"*40
- 
-#¶¨Òå³ÌÐòÑ­»·Ìå
+        print "-" * 40
+
+#ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½ï¿½ï¿½
 def for_qb():
-    for page in range(int(p),281):
-        print "-"*18 + "µÚ" + str(page) + "Ò³" + "-"*18
+    for page in range(int(p), 281):
+        print "-" * 18 + "ï¿½ï¿½" + str(page) + "Ò³" + "-" * 18
         qiubai(page)
- 
-#¸Ã²¿·Ö´úÂëµÄÄ¿ÊÇÎªÁËÉè¼ÆµÄÑÏ½÷£¬¾¡¿ÉÄÜµÄÊ¹³ÌÐò²»·¢Éú±ÀÀ£
+
+#ï¿½Ã²ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Üµï¿½Ê¹ï¿½ï¿½ï¿½ò²»·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 def if_qb():
     global p
-    p = raw_input("ÊäÈëÒª¿´µÄÒ³Êý1~280:")
+    p = raw_input("ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½1~280:")
     if p == "q":
         exit()
-    elif not p.isdigit() or p =="0":
+    elif not p.isdigit() or p == "0":
         if_qb()
     else:
         for_qb()
-print "-"*40
-print "ôÜ°ÙÃüÁîÐÐ°æ¡ª¡ªByron"
-print "Ò»ÈëôÜ°ÙÉîËÆº££¬´Ó´Ë½Ú²ÙÊÇÂ·ÈË"
-print 'ÊäÈë"q"ÍË³ö³ÌÐò'
-print "-"*40
- 
+
+
+print "-" * 40
+print "ï¿½Ü°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð°æ¡ªï¿½ï¿½Byron"
+print "Ò»ï¿½ï¿½ï¿½Ü°ï¿½ï¿½ï¿½ï¿½Æºï¿½ï¿½ï¿½ï¿½Ó´Ë½Ú²ï¿½ï¿½ï¿½Â·ï¿½ï¿½"
+print 'ï¿½ï¿½ï¿½ï¿½"q"ï¿½Ë³ï¿½ï¿½ï¿½ï¿½ï¿½'
+print "-" * 40
+
 if_qb()

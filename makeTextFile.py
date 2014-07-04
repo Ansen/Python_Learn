@@ -1,6 +1,7 @@
 'makeTextFile.py -- create text file'
 
 import os
+
 ls = os.linesep
 #get filename
 while True:

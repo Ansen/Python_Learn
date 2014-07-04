@@ -6,88 +6,93 @@ import time
 import json
 import sys
 
-# 解决UnicodeDecodeError: 'ascii' codec can't decode byte 0xe4 in position 0
+# 锟斤拷锟経nicodeDecodeError: 'ascii' codec can't decode byte 0xe4 in position 0
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+
 def novelFilter(content):
-  content=content.replace('<br />\n<br />','')
-  content=content.replace('<br />','')
-  content=content.replace('&nbsp;','')
-  content=content.replace('<dd id="contents">','')
-  content=content.replace('</dd>','')
-  return content
+    content = content.replace('<br />\n<br />', '')
+    content = content.replace('<br />', '')
+    content = content.replace('&nbsp;', '')
+    content = content.replace('<dd id="contents">', '')
+    content = content.replace('</dd>', '')
+    return content
+
 
 def novelFetch(url, title):
-  novel = urllib2.urlopen(url)
-  soup = BeautifulSoup(novel.read().decode('gbk', 'ignore'))
-  contents = '\n' + title + '\n' + str(soup.find('dd', id = 'contents'))
-  contents = novelFilter(contents)
+    novel = urllib2.urlopen(url)
+    soup = BeautifulSoup(novel.read().decode('gbk', 'ignore'))
+    contents = '\n' + title + '\n' + str(soup.find('dd', id='contents'))
+    contents = novelFilter(contents)
 
-  print title.decode("utf-8")
-  return contents
+    print title.decode("utf-8")
+    return contents
+
 
 def novelSelect(url, mark):
-  link = urllib2.urlopen(url)
-  soup = BeautifulSoup(link.read().decode('gbk', 'ignore'))
-  body = soup.findAll('td')
+    link = urllib2.urlopen(url)
+    soup = BeautifulSoup(link.read().decode('gbk', 'ignore'))
+    body = soup.findAll('td')
 
-  flag = False
-  cont = ''
-  href = ''
-  title = ''
+    flag = False
+    cont = ''
+    href = ''
+    title = ''
 
-  for i in body:
-    try:
-      href = url + i.a['href']
-      title = str(i.a.string)
+    for i in body:
+        try:
+            href = url + i.a['href']
+            title = str(i.a.string)
 
-      if flag and href:
-        cont += novelFetch(href, title)
+            if flag and href:
+                cont += novelFetch(href, title)
 
-      if title.decode("utf-8") == mark:
-        flag = True
+            if title.decode("utf-8") == mark:
+                flag = True
 
-    except:
-      pass
+        except:
+            pass
 
-  return {
-    'contents': cont,
-    'bookmark': title
-  }
+    return {
+        'contents': cont,
+        'bookmark': title
+    }
+
 
 def novelManage(info=0):
-  if info:
-    f = codecs.open('novel.json', 'w')
-    f.write(json.dumps(info, indent=2, ensure_ascii=False))
-    f.close()
-  else:
-    f = codecs.open('novel.json', 'r')
-    info = json.loads(f.read())
-  return info
+    if info:
+        f = codecs.open('novel.json', 'w')
+        f.write(json.dumps(info, indent=2, ensure_ascii=False))
+        f.close()
+    else:
+        f = codecs.open('novel.json', 'r')
+        info = json.loads(f.read())
+    return info
 
-if __name__=='__main__':
-  novels = novelManage()
-  hasUpdate = False
 
-  for title in novels:
-    novel = novelSelect(novels[title]['url'], novels[title]['bookmark'])
+if __name__ == '__main__':
+    novels = novelManage()
+    hasUpdate = False
 
-    cont = novel['contents']
-    bookmark = novel['bookmark']
+    for title in novels:
+        novel = novelSelect(novels[title]['url'], novels[title]['bookmark'])
 
-    if cont and bookmark:
-      novels[title]['bookmark'] = bookmark
+        cont = novel['contents']
+        bookmark = novel['bookmark']
 
-      timesamp = time.strftime("%Y%m%d%H%M", time.localtime())
-      f = codecs.open(title + '_' + timesamp + '.txt', 'w', 'gbk') #使用gbk格式
-      f.write(cont)
-      f.close()
+        if cont and bookmark:
+            novels[title]['bookmark'] = bookmark
 
-      hasUpdate = True
+            timesamp = time.strftime("%Y%m%d%H%M", time.localtime())
+            f = codecs.open(title + '_' + timesamp + '.txt', 'w', 'gbk') #使锟斤拷gbk锟斤拷式
+            f.write(cont)
+            f.close()
 
-  if not hasUpdate:
-    print '小说没有更新。'.decode('utf-8')
-  else:
-    novelManage(novels)
+            hasUpdate = True
+
+    if not hasUpdate:
+        print '小说没锟叫革拷锟铰★拷'.decode('utf-8')
+    else:
+        novelManage(novels)
 

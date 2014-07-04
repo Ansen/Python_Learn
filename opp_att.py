@@ -1,10 +1,13 @@
 class Bird(object):
     feather = True
 
+
 class chicken(Bird):
     fly = False
+
     def __init__(self, age):
         self.age = age
+
 
 summer = chicken(2)
 

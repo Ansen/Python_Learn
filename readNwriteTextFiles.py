@@ -1,6 +1,7 @@
 'readNwriteTextFiles.py -- create and read text file'
 import os
 
+
 def CreateTextFile():
     while True:
         fname = raw_input('Enter Filenane: ')
@@ -22,11 +23,12 @@ def CreateTextFile():
     fobj.close()
     print 'DONE!'
 
+
 def ReadTextFile():
     fname = raw_input('Enter Filename: ')
     try:
         fobj = open(fname, 'r')
-    except IOError, e:
+    except IOError as e:
         print "*** file open error: ", e
     else:
         for eachline in fobj:
@@ -37,7 +39,6 @@ def ReadTextFile():
 print """If you want to create text file, enter '1'.
          If you want to read text file, enter '2'."""
 Choice = raw_input('> ')
-
 
 if Choice == '1':
     CreateTextFile()

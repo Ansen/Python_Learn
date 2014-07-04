@@ -1,27 +1,26 @@
 import os
 import sys
 
+
 def ReadTextFile(fname):
-    try:
-        fobj = open(fname, 'r')
-    except IOError, e:
-        print '*** file open error: ', e
-    else:
-        items = []
-        num = 0
-        for x in fobj:
-            x = x.rstrip('\n')
-            x = x.rstrip('\r')
-            print '%s %s'%(num, x)
-            items.append(x)
-            num +=1
+    fobj = open(fname, 'r')
+    items = []
+    num = 0
+    for x in fobj:
+        x = x.rstrip('\n')
+        x = x.rstrip('\r')
+        print num, x
+        items.append(x)
+        num += 1
     fobj.close()
     return items
 
+
 def WriteTextFile(fname, items):
     fobj = open(fname, 'w')
-    fobj.writelines(['%s%s' %(x,ls) for x in items])
+    fobj.writelines(['%s%s' % (x, ls) for x in items])
     fobj.close()
+
 
 def CreateNewTextFile(fname):
     items = []
@@ -32,24 +31,25 @@ def CreateNewTextFile(fname):
             break
         else:
             items.append(entry)
-    WriteTextFile(fname,items)
-    print '%s was created.' %fname
+    WriteTextFile(fname, items)
+    print '%s was created.' % fname
+
 
 def EditTextFile(fname):
     items = ReadTextFile(fname)
     print '\nEnter num to EDIT  a to ADD a line'
     Edit_or_Add = raw_input('> ')
-    
+
     if Edit_or_Add == 'a':
         a = raw_input('Enter your words\n> ')
         items.append(a)
-        
+
     elif Edit_or_Add <= len(items):
         a = raw_input('Enter your new words\n> ')
         items[int(Edit_or_Add)] = a
-        
+
     else:
-        print "I dont't know '%s', Bye!" %Edit_or_Add
+        print "I dont't know '%s', Bye!" % Edit_or_Add
         sys.exit()
 
     save = raw_input('Enter y to save other words to quit and not save:')

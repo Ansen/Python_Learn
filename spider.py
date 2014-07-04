@@ -8,17 +8,20 @@
 '''
 import urllib2
 import re
+
 url = r'http://www.ansen.org'
 html = urllib2.urlopen(url).read()
-start_tag ='<p'
-finish_tag ='</p>'
+start_tag = '<p'
+finish_tag = '</p>'
 reg = ''
 content = re.compile(reg).findall(html)
 filter_char = ['<div', '<a', 'head']
 
-def deco(func,func2):
+
+def deco(func, func2):
     content = re.compile(func).findall(func2)
     return content
+
 
 @deco
 def get_url_content():

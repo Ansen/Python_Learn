@@ -1,6 +1,7 @@
 'EditTextFile.py -- Edit text file line by line'
 import os
 
+
 def CreateNewTextFile(Cname):
     Contents = []
     print "\nEnter lines ('.' by itself to quit).\n"
@@ -13,18 +14,19 @@ def CreateNewTextFile(Cname):
     fobj = open(Cname, 'w')
     fobj.writelines(['%s%s' % (x, ls) for x in Contents])
     fobj.close()
-    print '%s was created.' %Cname
+    print '%s was created.' % Cname
     print Contents
+
 
 def EditTextFile(Ename):
     fobj = open(Ename, 'r')
     tmp = []
     i = 0
     for eachline in fobj:
-        i+=1
+        i += 1
         eachline = eachline.rstrip('\n')
         eachline = eachline.rstrip('\r')
-        print '%s %s'%(i, eachline)
+        print '%s %s' % (i, eachline)
         tmp.append(eachline)
     fobj.close()
     print '\n Enter num to EDIT  a to ADD a line'
@@ -32,7 +34,7 @@ def EditTextFile(Ename):
     if Edit_or_Add == 'a':
         a = raw_input('Enter your words\n> ')
         tmp.append(a)
-    elif Edit_or_Add in range(0,i,1):
+    elif Edit_or_Add in range(0, i, 1):
         e = raw_input('Enter your new words\n> ')
         tmp[int(Edit_or_Add)] = e
     else:
@@ -41,12 +43,14 @@ def EditTextFile(Ename):
     save = raw_input('Enter YES to save other words to quit and not save:')
     if save == 'YES':
         Efobj = open(Ename, 'w')
-        Efobj.writelines(['%s%s' %(x, ls) for x in tmp])
+        Efobj.writelines(['%s%s' % (x, ls) for x in tmp])
         Efobj.close()
+
+
 def ReadTextFile(Rname):
     try:
         fobj = open(Rname, 'r')
-    except IOError, e:
+    except IOError as e:
         print '*** file open error: ', e
     else:
         print 'FileName: ', Rname
@@ -54,6 +58,7 @@ def ReadTextFile(Rname):
         for eachline in fobj:
             print eachline,
         print '\n------EOF-------'
+
 
 def ChekTextFile(Chkname):
     if os.path.exists(Chkname):
@@ -69,8 +74,8 @@ def ChekTextFile(Chkname):
     else:
         print "'%s' does not exists, create a new" % Chkname
         CreateNewTextFile(Chkname)
-            
-    
+
+
 print """
          Enter a filename,you can do three things:
          1.Create an new text file if it not exists.

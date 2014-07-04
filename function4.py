@@ -1,5 +1,6 @@
-def func(a,b,c):
-    print a,b,c
+def func(a, b, c):
+    print a, b, c
 
-args = (1,3,4)
+
+args = (1, 3, 4)
 func(*args)
