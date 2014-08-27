@@ -3,7 +3,7 @@ import binascii
 
 def str2list(list):
     for i in range(0,len(list)-1,2):
-        print '%s%s ' %(list[i], list[i+1]),
+        print '%s%s '%(list[i], list[i+1]),
         
 
 def Hex2ascii(char):
