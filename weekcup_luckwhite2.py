@@ -15,15 +15,19 @@ def get_rankpage_url(rankpage):
         return rankpageid
 
 def get_whitelist(pageid,rule):
+    luckid = []
     for i in pageid:
         url = 'http://www.taojingu.cn/news/view.aspx?id=' + i
         rank = re_rule(url, rule)
         for i in range(57, len(rank), 10):
             userid = rank[i]
-            print userid[1]
+            luckid.append(userid[1])
+    return luckid
 
 newsurl = 'http://www.taojingu.cn/news/?classid=329'
 newsrule = 'href="/news/view.aspx[?]id=(.*?)"(.*?)</a>'
 pagerule = '<tr class="row"><td class="cr1">(.*?)</td><td class="cr2">(.*?)</td><td class="cr3">'
+luckid = list(set(get_whitelist(get_rankpage_url(re_rule(newsurl, newsrule)), pagerule)))
 
-get_whitelist(get_rankpage_url(re_rule(newsurl, newsrule)), pagerule)
+for i in luckid:
+    print i
